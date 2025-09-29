@@ -1,22 +1,35 @@
 from relationship_app.models import Author, Book, Library, Librarian
 
-def run_demo():
-    # Create an author
-    author = Author.objects.create(name="George Orwell")
+# 1. Query all books by a specific author
+def books_by_author(author_name):
+    author = Author.objects.get(name=author_name)
+    books = Book.objects.filter(author=author)
+    print(f"Books by {author_name}:")
+    for book in books:
+        print(f"- {book.title}")
 
-    # Create a book by the author
-    book = Book.objects.create(title="1984", author=author)
+# 2. List all books in a library
+def books_in_library(library_name):
+    library = Library.objects.get(name=library_name)
+    books = library.books.all()
+    print(f"Books in the library {library_name}:")
+    for book in books:
+        print(f"- {book.title}")
 
-    # Create a library
-    library = Library.objects.create(name="Central Library")
-    library.books.add(book)
+# 3. Retrieve the librarian for a library
+def librarian_for_library(library_name):
+    library = Library.objects.get(name=library_name)
+    librarian = Librarian.objects.get(library=library)
+    print(f"The librarian for {library_name} is {librarian.name}")
 
-    # Create a librarian for the library
-    librarian = Librarian.objects.create(name="Martha", library=library)
+# Test the queries
+if __name__ == "__main__":
+    # Query 1: Books by a specific author (change 'Author Name' to an existing author)
+    books_by_author('Author Name')
 
-    # Queries
-    print("Books by George Orwell:", [b.title for b in Book.objects.filter(author=author)])
-    print("Books in Central Library:", [b.title for b in library.books.all()])
-    print("Librarian for Central Library:", librarian.name)
+    # Query 2: Books in a specific library (change 'Library Name' to an existing library)
+    books_in_library('Library Name')
 
+    # Query 3: Librarian for a specific library (change 'Library Name' to an existing library)
+    librarian_for_library('Library Name')
     
