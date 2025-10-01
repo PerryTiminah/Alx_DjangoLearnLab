@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test, per
 from django.contrib.auth.views import LoginView, LogoutView  # ✅ FIXED IMPORT
 
 from .models import Book, Library, UserProfile
+from django.contrib.auth.decorators import permission_required
+
 
 
 
