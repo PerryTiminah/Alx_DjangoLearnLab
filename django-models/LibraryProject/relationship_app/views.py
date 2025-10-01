@@ -8,7 +8,9 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.decorators import permission_required   
 from django.contrib.auth.views import LoginView, LogoutView
 
-from .models import Book, Library, UserProfile
+from .models import Book, UserProfile
+from .models import Library
+
 
 
 
